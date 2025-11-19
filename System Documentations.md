@@ -34,7 +34,7 @@ The Academic Progress Tracker is a web-based application designed to help univer
 - AI-powered performance analysis and recommendations
 - Administrative dashboard
 
-### 1.2 Technology Stack (Simplified)
+### 1.2 Technology Stack
 
 **Frontend:**
 - React.js or Next.js
@@ -42,15 +42,14 @@ The Academic Progress Tracker is a web-based application designed to help univer
 - Recharts (lightweight visualization)
 
 **Backend:**
-- Elysia.js (Fast, modern TypeScript framework)
 - Supabase (Database + Authentication all-in-one)
 
 **AI/Analytics:**
-- Google Gemini API (via wrapper)
+- Google Gemini API
 - Simple prompt engineering for analysis
 
 **Deployment:**
-- Everything on Vercel or Cloudflare Pages
+- Vercel or Cloudflare Pages
 
 **Why This Stack:**
 - Supabase handles auth + database → no need for separate auth library
@@ -637,7 +636,6 @@ Format your response as JSON with this structure:
 })
 ```
 
-**That's it for AI!** No complex ML models, no training, no Python Flask service. Just prompt engineering with Gemini.
 
 ---
 
@@ -759,7 +757,6 @@ return analysis
 - Free forever
 
 **For MVP:** Completely free
-**For 1000+ users:** Still mostly free, upgrade to paid tier if needed (~$0.00025 per request)
 
 ### 5.7 Future AI Enhancements (Post-MVP)
 
@@ -943,9 +940,9 @@ app.post('/api/courses', async ({ body }) => {
 
 ## 8. MVP Scope & Implementation Plan (Simplified)
 
-### 8.1 MVP Features - The Bare Minimum
+### 8.1 MVP Features
 
-**Week 1: Setup & Authentication (Day 1-7)**
+**Setup & Authentication
 - [ ] Set up Supabase project
 - [ ] Create database tables (profiles, courses)
 - [ ] Implement RLS policies
@@ -953,7 +950,7 @@ app.post('/api/courses', async ({ body }) => {
 - [ ] Implement Supabase auth (signup/login) in frontend
 - [ ] Create basic protected routes
 
-**Week 2: Core Features (Day 8-14)**
+**Core Features
 - [ ] Set up Elysia.js backend
 - [ ] Create API endpoints:
   - Profile CRUD
@@ -963,21 +960,21 @@ app.post('/api/courses', async ({ body }) => {
 - [ ] Frontend: Profile setup form
 - [ ] Auto-calculate CGPA
 
-**Week 3: Dashboard & Visualization (Day 15-21)**
+**Dashboard & Visualization
 - [ ] Dashboard layout with CGPA display
 - [ ] Progress bar (credit completion)
 - [ ] Course list with filters
 - [ ] Add Recharts for basic visualization
 - [ ] Semester GPA chart
 
-**Week 4: AI Analysis (Day 22-28)**
+**AI Analysis
 - [ ] Set up Gemini API
 - [ ] Create analysis endpoint
 - [ ] Design analysis prompt
 - [ ] Display AI insights on dashboard
 - [ ] Loading states and error handling
 
-**Week 5: Polish & Deploy (Day 29-35)**
+**Polish & Deploy
 - [ ] Mobile responsiveness
 - [ ] Error messages and validation
 - [ ] Deploy backend to Vercel/Cloudflare
@@ -1299,8 +1296,8 @@ If RLS is configured correctly, these should all fail gracefully.
 
 **Step 1: Clone & Install (5 min)**
 ```bash
-git clone https://github.com/your-team/academic-progress-tracker
-cd academic-progress-tracker
+git clone https://github.com/BU-SENG/foss-project-arid-stone
+cd foss-project-arid-stone
 
 # Install dependencies
 cd frontend && npm install
@@ -1418,17 +1415,17 @@ git push origin main # Auto-deploy via GitHub
 
 ### 12.1 Monthly Costs for MVP
 
-| Service | Free Tier | Cost for MVP | Notes |
-|---------|-----------|--------------|-------|
-| **Supabase** | 500MB DB, 50K monthly active users | **$0** | More than enough for MVP |
-| **Vercel** | 100GB bandwidth, unlimited sites | **$0** | Perfect for student projects |
-| **Gemini API** | 60 req/min, 1500 req/day | **$0** | Generous free tier |
-| **Domain** (optional) | N/A | $12/year | Use free Vercel subdomain instead |
-| **Total** | | **$0/month** | Everything runs on free tiers! |
+| Service        | Free Tier                          | Cost for MVP |                 Notes             |
+|----------------|------------------------------------|--------------|-----------------------------------|
+| **Supabase**   | 500MB DB, 50K monthly active users | **$0**       | More than enough for MVP          |
+| **Vercel**     | 100GB bandwidth, unlimited sites   | **$0**       | Perfect for student projects      |
+| **Gemini API** | 60 req/min, 1500 req/day           | **$0**       | Generous free tier                |
+| **Domain**     | N/A                                | $12/year     | Use free Vercel subdomain instead |
+| **Total**      |                                    | **$0/month** | Everything runs on free tiers     |
 
 ### 12.2 Scaling Costs (Post-MVP)
 
-**When you hit 1000+ users:**
+**If we hit 1000+ users:**
 - Supabase: Might need Pro plan ($25/month)
 - Vercel: Still free (unless 100GB bandwidth exceeded)
 - Gemini: Still mostly free
@@ -1502,12 +1499,6 @@ This simplified documentation provides everything your team needs to build a min
 7. ✅ No audit logs for MVP
 8. ✅ Focus on core features only
 
-**What You Get:**
-- Fast development cycle
-- Zero infrastructure costs
-- Modern, scalable tech stack
-- Production-ready in 5 weeks
-- Easy to maintain and extend
 
 **Next Immediate Steps:**
 1. [ ] Review this doc with team
@@ -1599,17 +1590,7 @@ function getGradePoint(grade: string, scale: number): number {
 }
 ```
 
----
 
-**Document Version:** 2.0 (Simplified for MVP)  
-**Last Updated:** November 2025  
-**Prepared by:** Arid Stone Group - Group C  
-**Tech Stack:** Supabase + Elysia.js + Gemini API + Vercel
-
-**Remember:** Ship fast, iterate later. Focus on core functionality first. Perfect is the enemy of done. 🚀 }))
-  })
-})
-```
 
 Invalid requests are rejected before reaching your code.
 
@@ -1641,41 +1622,41 @@ Add `.env.local` to `.gitignore`
 
 ### 8.1 MVP Features (Must-Have)
 
-**Phase 1: Core Functionality (Weeks 1-4)**
+**Phase 1: Core Functionality**
 
-#### Week 1: Authentication & Setup
+#### Authentication & Setup
 - ✓ User registration and login
 - ✓ Password hashing with bcrypt
 - ✓ JWT token generation
 - ✓ Basic profile setup (degree program, grading scale, total credits)
 
-#### Week 2: Course Management
+#### Course Management
 - ✓ Add course functionality
 - ✓ Edit course functionality
 - ✓ Delete course functionality
 - ✓ List all courses
 - ✓ Mark course status (completed, in progress, to be taken)
 
-#### Week 3: Dashboard & CGPA Calculation
+#### Dashboard & CGPA Calculation
 - ✓ Automatic CGPA calculation
 - ✓ Display completed courses
 - ✓ Progress bar (credit completion percentage)
 - ✓ Basic dashboard layout with key metrics
 
-#### Week 4: Basic AI Analysis
+#### Basic AI Analysis
 - ✓ Identify weakest subject areas (simple average calculation)
 - ✓ Basic CGPA prediction (linear projection)
 - ✓ Display analysis results on dashboard
 
-**Phase 2: Enhanced Features (Weeks 5-6)**
+**Phase 2: Enhanced Features**
 
-#### Week 5: Visualization & UX
+#### Visualization & UX
 - ✓ Interactive charts (semester GPA trends)
 - ✓ Responsive design for mobile
 - ✓ Improved UI/UX with better styling
 - ✓ Loading states and error handling
 
-#### Week 6: Admin Panel (Basic)
+#### Admin Panel (Basic)
 - ✓ Admin login
 - ✓ View all users
 - ✓ Deactivate/activate user accounts
@@ -1704,7 +1685,7 @@ Add `.env.local` to `.gitignore`
 - System health monitoring dashboard
 - Bulk user management
 
-### 8.3 Development Timeline (8 Weeks)
+### 8.3 Development Timeline
 
 ```
 Week 1-2:  Backend Setup + Authentication + Database
@@ -1717,7 +1698,7 @@ Week 8:    Bug Fixes + Deployment + Documentation
 
 ### 8.4 Team Roles Recommendation
 
-**For a 4-5 Person Team:**
+**For a 8-9 Person Team:**
 
 1. **Backend Developer (1-2 people)**
    - API development
@@ -1737,7 +1718,7 @@ Week 8:    Bug Fixes + Deployment + Documentation
    - Prediction models
    - Data processing
 
-4. **Full-Stack/DevOps (1 person)**
+4. **Full-Stack/DevOps (1-3 people)**
    - System integration
    - Deployment pipeline
    - Testing
@@ -1760,9 +1741,7 @@ Week 8:    Bug Fixes + Deployment + Documentation
 - cors, helmet (security)
 
 **AI Module:**
-- Python Flask (lightweight)
-- NumPy, Pandas (data processing)
-- Basic statistical functions (no heavy ML for MVP)
+- Gemini API
 
 **Deployment:**
 - Frontend: Vercel/Netlify
@@ -2034,21 +2013,21 @@ describe('Course Management Flow', () => {
 
 ### 12.1 Technical Risks
 
-| Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
-| Database performance issues | High | Medium | Implement indexing, query optimization, caching |
-| AI module latency | Medium | Medium | Use asynchronous processing, optimize algorithms |
-| Security vulnerabilities | High | Low | Regular security audits, follow best practices |
-| Third-party service downtime | Medium | Low | Choose reliable providers, implement fallbacks |
+| Risk                         | Impact | Probability | Mitigation                                       |
+|------------------------------|--------|-------------|--------------------------------------------------|
+| Database performance issues  | High   | Medium      | Implement indexing, query optimization, caching  |
+| AI module latency            | Medium | Medium      | Use asynchronous processing, optimize algorithms |
+| Security vulnerabilities     | High   | Low         | Regular security audits, follow best practices   |
+| Third-party service downtime | Medium | Low         | Choose reliable providers, implement fallbacks   |
 
 ### 12.2 Project Risks
 
-| Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
-| Scope creep | High | High | Strict MVP definition, change control process |
-| Timeline delays | Medium | Medium | Buffer time in schedule, prioritize features |
-| Team member unavailability | Medium | Medium | Cross-training, documentation |
-| Technology learning curve | Low | Medium | Early research, prototyping, tutorials |
+| Risk                       | Impact | Probability | Mitigation                                    |
+|----------------------------|--------|-------------|-----------------------------------------------|
+| Scope creep                | High   | High        | Strict MVP definition, change control process |
+| Timeline delays            | Medium | Medium      | Buffer time in schedule, prioritize features  |
+| Team member unavailability | Medium | Medium      | Cross-training, documentation                 |
+| Technology learning curve  | Low    | Medium      | Early research, prototyping, tutorials        |
 
 ---
 
@@ -2135,6 +2114,6 @@ This System Documentation provides a comprehensive foundation for the Academic P
 
 ---
 
-**Document Version:** 1.0  
-**Last Updated:** November 2025  
-**Prepared by:** Arid Stone Group - Group C
+**Document Version:** 1.3  
+**Last Updated:** 19, November 2025  
+**Prepared by:** Okoh Perfection - Arid Stone Group - Group C
