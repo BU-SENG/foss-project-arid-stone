@@ -49,8 +49,8 @@ export default function ProfilePage() {
 						<div className="card bg-base-100 shadow-xl">
 							<div className="card-body items-center text-center">
 								<div className="avatar placeholder">
-									<div className="bg-neutral text-neutral-content rounded-full w-24">
-										<span className="text-3xl">
+									<div className="bg-neutral text-neutral-content rounded-full w-24 flex justify-center items-center">
+										<span className="text-4xl">
 											{user.name.charAt(0).toUpperCase()}
 										</span>
 									</div>
