@@ -2,6 +2,14 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+const AVAILABLE_MODELS = [
+	"gemini-2.5-pro",
+	"gemini-2.5-flash",
+	"gemini-2.5-flash-lite",
+	"gemini-2.0-flash",
+	"gemini-2.0-flash-lite",
+] as const;
+
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 export interface GeminiResponse {
@@ -17,7 +25,7 @@ export interface GeminiResponse {
  */
 export async function generateGeminiContent(
 	prompt: string,
-	model: string = "gemini-pro",
+	models: ReadonlyArray<string> = AVAILABLE_MODELS,
 ): Promise<GeminiResponse> {
 	try {
 		if (!prompt || prompt.trim().length === 0) {
@@ -34,10 +42,17 @@ export async function generateGeminiContent(
 			};
 		}
 
+		const model = models[0];
+
+		if (!model)
+			return {
+				success: false,
+				error: "Available models exhausted. Try again later",
+			};
+
 		const genModel = genAI.getGenerativeModel({ model });
 		const result = await genModel.generateContent(prompt);
-		const response = await result.response;
-		const text = response.text();
+		const text = result.response.text();
 
 		return {
 			success: true,
@@ -45,20 +60,14 @@ export async function generateGeminiContent(
 			model,
 		};
 	} catch (error: unknown) {
-		console.error("Gemini API Error:", error);
-		const errorMessage =
-			error instanceof Error ? error.message : "Unknown error occurred";
-		return {
-			success: false,
-			error: "Failed to generate content",
-			details: errorMessage,
-		};
-	}
-}
+		console.error(
+			"Gemini API Error:",
+			error,
+			"The failed model was:",
+			models[0],
+			"Trying other models...",
+		);
 
-/**
- * Get available Gemini models
- */
-export async function getAvailableModels(): Promise<string[]> {
-	return ["gemini-pro", "gemini-1.5-pro", "gemini-1.5-flash"];
+		return generateGeminiContent(prompt, models.slice(1));
+	}
 }
