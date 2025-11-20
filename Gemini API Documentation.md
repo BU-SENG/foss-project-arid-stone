@@ -80,7 +80,7 @@ Send a POST request with:
 ## Important Notes
 
 - The API is ready to use - no configuration needed for most team members
-- Don't share the API key publicly on GitHub or social media
+- Don't share the API key publicly online or GitHub  
 - If you need the key for local development, contact the team lead
 
 ## Troubleshooting
