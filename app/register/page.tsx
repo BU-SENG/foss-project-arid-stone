@@ -108,9 +108,9 @@ export default function RegisterPage() {
 
 					<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 						<label className="w-full">
-							<span className="label-text font-medium">Full Name</span>
+							<span className="label font-medium">Full Name</span>
 							<label
-								className={`input input-bordered flex items-center gap-2 mt-1 ${
+								className={`input input-bordered flex items-center gap-2 mt-1 w-full ${
 									fieldErrors.name ? "input-error" : ""
 								}`}
 							>
@@ -129,19 +129,16 @@ export default function RegisterPage() {
 								/>
 							</label>
 							{fieldErrors.name && (
-								<span
-									className="label-text-alt text-error mt-1"
-									id="name-error"
-								>
+								<span className="label text-error mt-1" id="name-error">
 									{fieldErrors.name}
 								</span>
 							)}
 						</label>
 
 						<label className="w-full">
-							<span className="label-text font-medium">Email Address</span>
+							<span className="label font-medium">Email Address</span>
 							<label
-								className={`input input-bordered flex items-center gap-2 mt-1 ${
+								className={`input input-bordered flex items-center gap-2 mt-1 w-full ${
 									fieldErrors.email ? "input-error" : ""
 								}`}
 							>
@@ -162,19 +159,16 @@ export default function RegisterPage() {
 								/>
 							</label>
 							{fieldErrors.email && (
-								<span
-									className="label-text-alt text-error mt-1"
-									id="email-error"
-								>
+								<span className="label text-error mt-1" id="email-error">
 									{fieldErrors.email}
 								</span>
 							)}
 						</label>
 
 						<label className="w-full">
-							<span className="label-text font-medium">Password</span>
+							<span className="label font-medium">Password</span>
 							<label
-								className={`input input-bordered flex items-center gap-2 mt-1 ${
+								className={`input input-bordered flex items-center gap-2 mt-1 w-full ${
 									fieldErrors.password ? "input-error" : ""
 								}`}
 							>
@@ -195,19 +189,16 @@ export default function RegisterPage() {
 								/>
 							</label>
 							{fieldErrors.password && (
-								<span
-									className="label-text-alt text-error mt-1"
-									id="password-error"
-								>
+								<span className="label text-error mt-1" id="password-error">
 									{fieldErrors.password}
 								</span>
 							)}
 						</label>
 
 						<label className="w-full">
-							<span className="label-text font-medium">Confirm Password</span>
+							<span className="label font-medium">Confirm Password</span>
 							<label
-								className={`input input-bordered flex items-center gap-2 mt-1 ${
+								className={`input input-bordered flex items-center gap-2 mt-1 w-full ${
 									fieldErrors.confirmPassword ? "input-error" : ""
 								}`}
 							>
@@ -231,7 +222,7 @@ export default function RegisterPage() {
 							</label>
 							{fieldErrors.confirmPassword && (
 								<span
-									className="label-text-alt text-error mt-1"
+									className="label text-error mt-1"
 									id="confirm-password-error"
 								>
 									{fieldErrors.confirmPassword}

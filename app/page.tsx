@@ -80,9 +80,9 @@ export default function LoginPage() {
 
 					<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 						<label className="w-full">
-							<span className="label-text font-medium">Email Address</span>
+							<span className="label font-medium">Email Address</span>
 							<label
-								className={`input input-bordered flex items-center gap-2 mt-1 ${
+								className={`input input-bordered flex items-center gap-2 mt-1 w-full ${
 									fieldErrors.email ? "input-error" : ""
 								}`}
 							>
@@ -90,7 +90,7 @@ export default function LoginPage() {
 								<input
 									id="email-input"
 									type="email"
-									className="grow"
+									className="grow "
 									placeholder="you@example.com"
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
@@ -113,9 +113,9 @@ export default function LoginPage() {
 						</label>
 
 						<label className="w-full">
-							<span className="label-text font-medium">Password</span>
+							<span className="label font-medium">Password</span>
 							<label
-								className={`input input-bordered flex items-center gap-2 mt-1 ${
+								className={`input input-bordered flex items-center gap-2 mt-1 w-full ${
 									fieldErrors.password ? "input-error" : ""
 								}`}
 							>
@@ -136,10 +136,7 @@ export default function LoginPage() {
 								/>
 							</label>
 							{fieldErrors.password && (
-								<span
-									className="label-text-alt text-error mt-1"
-									id="password-error"
-								>
+								<span className="label text-error mt-1" id="password-error">
 									{fieldErrors.password}
 								</span>
 							)}
