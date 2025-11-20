@@ -1,5 +1,25 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Project Summary / Requirements
+
+This Academic Progress Tracker is designed for students to monitor their academic performance.  
+Key requirements include:
+
+- User authentication for students only  
+- Dashboard showing courses, grades, and progress  
+- Ability to update and track completed assignments and exams  
+- Responsive design for both desktop and mobile  
+- Optional notifications or reminders for upcoming tasks or deadlines
+
+## Purpose / Objective
+The Academic Progress Tracker helps students monitor and organize their academic performance, keeping track of courses, grades, and overall progress.
+
+## Key Features
+- Track course enrollment and completion  
+- Monitor grades and GPA  
+- View academic progress over time  
+- User-friendly dashboard for quick insights  
+
 ## Getting Started
 
 First, run the development server:
@@ -28,6 +48,9 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+### How to Contribute / Contact
+Contributions, feedback, and bug reports are welcome via pull requests or GitHub issues.
 
 ## Deploy on Vercel
 
