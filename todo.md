@@ -2,74 +2,87 @@
 
 ## Phase 1 — Project Setup
 
+- [x] Create project repository & initialize version control
+- [x] Set up backend environment (Next.js server functions)
+- [x] Initialize frontend (Next.js 16 + React 19)
+- [x] Prepare .env.example environment template
+- [ ] Set up production database (migrate from localStorage)
 
-- Create project repository & initialize version control
--  Set up backend environment (Node/Python/Java — team decision)
--  Set up database (MySQL / MongoDB / PostgreSQL — team decision)
-- Prepare .env.example environment template
-- Initialize frontend (React / Flutter / Vue — team decision)
+## Phase 2 — User Authentication
 
+- [x] Implement Registration (email + password)
+- [x] Implement Login with authentication middleware
+- [x] Create login & registration UI pages
+- [x] Add form validation & error handling (Valibot)
+- [ ] Implement secure session/token storage (backend required)
 
-## Phase 2 — User Authentication (FR-001, FR-002)
+## Phase 3 — Course Management
 
+- [x] API to add new course (course code, title, units, semester)
+- [x] API to edit existing course
+- [x] API to delete a course
+- [x] API to fetch all courses for a user
+- [x] Frontend form to add/edit/delete courses
+- [x] Input validation (duplicate codes, empty fields)
 
-- Implement Registration (email + password)
-- Implement Login with authentication middleware
-- Create login & registration UI pages
-- Add form validation & error handling
-- Implement secure session/token storage
+## Phase 4 — GPA & CGPA Calculation
 
-## Phase 3 — Course Management (FR-003, FR-005)
+- [x] Implement grade-to-point conversion
+- [x] Implement GPA calculation per semester
+- [x] Implement CGPA calculation overall
+- [x] Display GPA & CGPA dynamically on dashboard
+- [x] Ensure recalculation when grades change
 
+## Phase 5 — Visualization
 
-- API to add new course (course code, title, units, semester)
-- API to edit existing course
-- API to delete a course
-- API to fetch all courses for a user
-- Frontend form to add/edit/delete courses
-- Input validation (duplicate codes, empty fields)
+- [x] Integrate chart library (Recharts)
+- [x] GPA trend chart
+- [x] Progress-to-graduation progress bar
+- [x] Ensure charts load in under 3 seconds
 
+## Phase 6 — AI Insights
 
-## Phase 4 — GPA & CGPA Calculation (FR-004)
-- Implement grade-to-point conversion
--  Implement GPA calculation per semester
-- Implement CGPA calculation overall
-- Display GPA & CGPA dynamically on dashboard
-- Ensure recalculation when grades change
+- [x] Build AI or rule-based insights engine (Gemini + rule-based)
+- [x] Generate academic improvement suggestions
+- [x] Display insights on user dashboard
+- [x] Ensure insights update dynamically after grade changes
 
+## Phase 7 — PDF Export
 
-## Phase 5 — Visualization (FR-006)
-- Integrate chart library (Chart.js, Recharts, ApexCharts)
-- GPA trend chart
-- Progress-to-graduation progress bar
-- Ensure charts load in under 3 seconds
+- [x] Create PDF report layout (courses, GPA, CGPA, insights, graphs)
+- [x] Implement PDF generator (jsPDF or similar)
+- [x] Connect "Export Transcript" button to PDF generator
+- [x] Validate PDF formatting & accuracy
 
+## Phase 8 — Testing & Quality
 
-## Phase 6 — AI Insights (FR-007)
-- Build AI or rule-based insights engine
-- Generate academic improvement suggestions
-- Display insights on user dashboard
-- Ensure insights update dynamically after grade changes
+- [x] Unit tests for GPA utilities (22 tests)
+- [x] Unit tests for PDF generation (10 tests)
+- [ ] Frontend component tests
+- [ ] Integration testing (auth → course management → dashboard)
+- [ ] Performance testing (loading time < 3 seconds)
+- [ ] Accessibility audit (WCAG 2.1 AA compliance)
 
+## Phase 9 — Deployment
 
-## Phase 7 — PDF Export (FR-010)
-- Create PDF report layout (courses, GPA, CGPA, insights, graphs)
-- Implement PDF generator (jsPDF, PDFKit, Puppeteer)
-- Add “Download Report” button
-- Validate PDF formatting & accuracy
+- [ ] Deploy to production (Vercel/Netlify)
+- [ ] Set up production environment variables
+- [ ] Migrate to production database
+- [ ] Final end-to-end testing
+- [x] Write user documentation (README.md)
 
+---
 
-## Phase 8 — Testing
-- Backend unit tests
-- Frontend component tests
-- Integration testing (auth → course management → dashboard → PDF)
-- Performance testing (loading time < 3–5 seconds)
-- Fix bugs & UI inconsistencies
+## Current Status
 
+**Phases 3-7 Complete** ✅
+- All core features (Course Management, GPA Calculation, Visualization, AI Insights, PDF Export) are fully functional
+- localStorage storage layer abstracted for easy database migration
+- Modern UI with Lucide React icons and DaisyUI components
+- PDF transcript export with jsPDF including academic summary, semester performance, course details, and insights
 
-## Phase 9 — Deployment & Documentation
-- Deploy backend (Render, AWS, Railway, etc.)
-- Deploy frontend (Vercel, Netlify)
-- Connect to production database
-- Perform final end-to-end tests
-- Write final documentation & user guide
+**Next Priorities:**
+1. Implement secure authentication backend
+2. Set up production database (Supabase)
+3. Add frontend component tests
+4. Deploy to production
