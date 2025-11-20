@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, Sparkles } from "lucide-react";
+import { AlertCircle, FileText, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
@@ -25,6 +25,7 @@ import {
 	getTotalCoursesCompleted,
 	getTotalCredits,
 } from "../lib/utils/gpa";
+import { downloadTranscript } from "../lib/utils/pdf";
 
 export default function AnalysisPage() {
 	const router = useRouter();
@@ -35,6 +36,7 @@ export default function AnalysisPage() {
 	const [aiInsights, setAiInsights] = useState<string[]>([]);
 	const [loadingAi, setLoadingAi] = useState(false);
 	const [aiError, setAiError] = useState<string | null>(null);
+	const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
 	useEffect(() => {
 		if (!loading && !user) {
@@ -95,6 +97,17 @@ Provide insights in a numbered list format. Focus on:
 	if (!user) return null;
 
 	const courses = getUserCourses(user.id);
+
+	const handleExportPDF = () => {
+		setIsGeneratingPDF(true);
+		try {
+			downloadTranscript(user, courses, { includeInsights: true });
+		} catch (error) {
+			console.error("Failed to generate PDF:", error);
+		} finally {
+			setIsGeneratingPDF(false);
+		}
+	};
 	const cgpa = calculateCGPA(courses);
 	const totalCredits = getTotalCredits(courses);
 	const completedCourses = getTotalCoursesCompleted(courses);
@@ -112,11 +125,31 @@ Provide insights in a numbered list format. Focus on:
 			<Navbar userName={user.name} />
 
 			<div className="container mx-auto p-4 px-4 sm:px-6 lg:px-8 max-w-7xl">
-				<div className="mb-6">
-					<h1 className="text-3xl font-bold">Academic Analysis</h1>
-					<p className="opacity-70 mt-1">
-						Performance visualization and insights
-					</p>
+				<div className="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+					<div>
+						<h1 className="text-3xl font-bold">Academic Analysis</h1>
+						<p className="opacity-70 mt-1">
+							Performance visualization and insights
+						</p>
+					</div>
+					<button
+						type="button"
+						onClick={handleExportPDF}
+						disabled={isGeneratingPDF || courses.length === 0}
+						className="btn btn-accent gap-2"
+					>
+						{isGeneratingPDF ? (
+							<>
+								<span className="loading loading-spinner loading-sm" />
+								Generating...
+							</>
+						) : (
+							<>
+								<FileText className="w-4 h-4" />
+								Export PDF
+							</>
+						)}
+					</button>
 				</div>
 
 				<div className="tabs tabs-boxed mb-6 bg-base-100 shadow-lg flex-nowrap overflow-x-auto">

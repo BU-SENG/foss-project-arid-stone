@@ -34,6 +34,7 @@ Get API key: [Google AI Studio](https://makersuite.google.com/app/apikey)
 - Semester performance tracking
 - Interactive charts and analytics
 - AI-powered insights (Google Gemini)
+- PDF transcript export with comprehensive reports
 - Responsive design with mobile support
 - WCAG 2.1 AA accessible
 
@@ -46,6 +47,7 @@ Get API key: [Google AI Studio](https://makersuite.google.com/app/apikey)
 - Valibot (validation)
 - Recharts (charts)
 - Lucide React (icons)
+- jsPDF + jspdf-autotable (PDF generation)
 - Google Generative AI
 
 ## Project Structure

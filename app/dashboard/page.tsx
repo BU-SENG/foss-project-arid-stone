@@ -3,7 +3,7 @@
 import { FileText, Plus, Sparkles, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Navbar } from "../components/navbar";
 import { useAuth } from "../lib/hooks/use-auth";
 import type { Course } from "../lib/schemas/course";
@@ -17,10 +17,12 @@ import {
 	getTotalCoursesCompleted,
 	getTotalCredits,
 } from "../lib/utils/gpa";
+import { downloadTranscript } from "../lib/utils/pdf";
 
 export default function DashboardPage() {
 	const router = useRouter();
 	const { user, loading } = useAuth();
+	const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 	const courses = useMemo<Course[]>(
 		() => (user ? getUserCourses(user.id) : []),
 		[user],
@@ -49,6 +51,17 @@ export default function DashboardPage() {
 	const degreeProgress = calculateDegreeProgress(totalCredits);
 	const semesterPerformance = getSemesterPerformance(courses);
 	const insights = generateInsights(courses);
+
+	const handleExportTranscript = () => {
+		setIsGeneratingPDF(true);
+		try {
+			downloadTranscript(user, courses, { includeInsights: true });
+		} catch (error) {
+			console.error("Failed to generate PDF:", error);
+		} finally {
+			setIsGeneratingPDF(false);
+		}
+	};
 
 	return (
 		<div className="min-h-screen bg-base-200">
@@ -184,10 +197,21 @@ export default function DashboardPage() {
 									</Link>
 									<button
 										type="button"
+										onClick={handleExportTranscript}
+										disabled={isGeneratingPDF || courses.length === 0}
 										className="btn btn-accent btn-block justify-start gap-2"
 									>
-										<FileText className="w-4 h-4" />
-										Export Transcript
+										{isGeneratingPDF ? (
+											<>
+												<span className="loading loading-spinner loading-sm" />
+												Generating PDF...
+											</>
+										) : (
+											<>
+												<FileText className="w-4 h-4" />
+												Export Transcript
+											</>
+										)}
 									</button>
 								</div>
 							</div>
