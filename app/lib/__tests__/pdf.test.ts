@@ -3,16 +3,15 @@ import type { Course } from "../schemas/course";
 import type { User } from "../schemas/user";
 import { generateTranscriptPDF, getTranscriptBlob } from "../utils/pdf";
 
-const mockUser: User = {
+const mockUser = {
 	id: "test-user-123",
 	name: "John Doe",
 	email: "john.doe@example.com",
 	password: "hashedpassword",
 	createdAt: new Date().toISOString(),
-	updatedAt: new Date().toISOString(),
-};
+} as const satisfies User;
 
-const mockCourses: Course[] = [
+const mockCourses = [
 	{
 		id: "course-1",
 		userId: "test-user-123",
@@ -64,7 +63,7 @@ const mockCourses: Course[] = [
 		createdAt: new Date().toISOString(),
 		updatedAt: new Date().toISOString(),
 	},
-];
+] as const satisfies Course[];
 
 describe("PDF Generation", () => {
 	test("generateTranscriptPDF returns jsPDF instance", () => {
