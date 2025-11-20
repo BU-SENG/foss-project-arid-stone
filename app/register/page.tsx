@@ -106,13 +106,11 @@ export default function RegisterPage() {
 						</div>
 					)}
 
-					<form onSubmit={handleSubmit} className="space-y-4">
-						<div>
-							<label htmlFor="name-input" className="label">
-								<span className="label-text font-medium">Full Name</span>
-							</label>
-							<div
-								className={`input input-bordered flex items-center gap-2 ${
+					<form onSubmit={handleSubmit} className="flex flex-col gap-4">
+						<label className="w-full">
+							<span className="label-text font-medium">Full Name</span>
+							<label
+								className={`input input-bordered flex items-center gap-2 mt-1 ${
 									fieldErrors.name ? "input-error" : ""
 								}`}
 							>
@@ -129,22 +127,21 @@ export default function RegisterPage() {
 									aria-invalid={fieldErrors.name ? "true" : "false"}
 									aria-describedby={fieldErrors.name ? "name-error" : undefined}
 								/>
-							</div>
-							{fieldErrors.name && (
-								<div className="label">
-									<span className="label-text-alt text-error" id="name-error">
-										{fieldErrors.name}
-									</span>
-								</div>
-							)}
-						</div>
-
-						<div>
-							<label htmlFor="email-input" className="label">
-								<span className="label-text font-medium">Email Address</span>
 							</label>
-							<div
-								className={`input input-bordered flex items-center gap-2 ${
+							{fieldErrors.name && (
+								<span
+									className="label-text-alt text-error mt-1"
+									id="name-error"
+								>
+									{fieldErrors.name}
+								</span>
+							)}
+						</label>
+
+						<label className="w-full">
+							<span className="label-text font-medium">Email Address</span>
+							<label
+								className={`input input-bordered flex items-center gap-2 mt-1 ${
 									fieldErrors.email ? "input-error" : ""
 								}`}
 							>
@@ -163,22 +160,21 @@ export default function RegisterPage() {
 										fieldErrors.email ? "email-error" : undefined
 									}
 								/>
-							</div>
-							{fieldErrors.email && (
-								<div className="label">
-									<span className="label-text-alt text-error" id="email-error">
-										{fieldErrors.email}
-									</span>
-								</div>
-							)}
-						</div>
-
-						<div>
-							<label htmlFor="password-input" className="label">
-								<span className="label-text font-medium">Password</span>
 							</label>
-							<div
-								className={`input input-bordered flex items-center gap-2 ${
+							{fieldErrors.email && (
+								<span
+									className="label-text-alt text-error mt-1"
+									id="email-error"
+								>
+									{fieldErrors.email}
+								</span>
+							)}
+						</label>
+
+						<label className="w-full">
+							<span className="label-text font-medium">Password</span>
+							<label
+								className={`input input-bordered flex items-center gap-2 mt-1 ${
 									fieldErrors.password ? "input-error" : ""
 								}`}
 							>
@@ -197,25 +193,21 @@ export default function RegisterPage() {
 										fieldErrors.password ? "password-error" : undefined
 									}
 								/>
-							</div>
-							{fieldErrors.password && (
-								<div className="label">
-									<span
-										className="label-text-alt text-error"
-										id="password-error"
-									>
-										{fieldErrors.password}
-									</span>
-								</div>
-							)}
-						</div>
-
-						<div>
-							<label htmlFor="confirm-password-input" className="label">
-								<span className="label-text font-medium">Confirm Password</span>
 							</label>
-							<div
-								className={`input input-bordered flex items-center gap-2 ${
+							{fieldErrors.password && (
+								<span
+									className="label-text-alt text-error mt-1"
+									id="password-error"
+								>
+									{fieldErrors.password}
+								</span>
+							)}
+						</label>
+
+						<label className="w-full">
+							<span className="label-text font-medium">Confirm Password</span>
+							<label
+								className={`input input-bordered flex items-center gap-2 mt-1 ${
 									fieldErrors.confirmPassword ? "input-error" : ""
 								}`}
 							>
@@ -236,22 +228,20 @@ export default function RegisterPage() {
 											: undefined
 									}
 								/>
-							</div>
+							</label>
 							{fieldErrors.confirmPassword && (
-								<div className="label">
-									<span
-										className="label-text-alt text-error"
-										id="confirm-password-error"
-									>
-										{fieldErrors.confirmPassword}
-									</span>
-								</div>
+								<span
+									className="label-text-alt text-error mt-1"
+									id="confirm-password-error"
+								>
+									{fieldErrors.confirmPassword}
+								</span>
 							)}
-						</div>
+						</label>
 
 						<button
 							type="submit"
-							className="btn btn-primary w-full mt-2"
+							className="btn btn-primary w-full"
 							disabled={
 								loading || !name || !email || !password || !confirmPassword
 							}
@@ -267,14 +257,12 @@ export default function RegisterPage() {
 							)}
 						</button>
 
-						<div className="text-center text-sm sm:text-base">
-							<p className="opacity-70">
-								Already have an account?{" "}
-								<Link href="/" className="link link-primary">
-									Login
-								</Link>
-							</p>
-						</div>
+						<p className="text-center text-sm sm:text-base opacity-70">
+							Already have an account?{" "}
+							<Link href="/" className="link link-primary">
+								Login
+							</Link>
+						</p>
 					</form>
 				</div>
 			</div>

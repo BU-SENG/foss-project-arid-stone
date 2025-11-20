@@ -78,13 +78,11 @@ export default function LoginPage() {
 						</div>
 					)}
 
-					<form onSubmit={handleSubmit} className="space-y-4">
-						<div>
-							<label htmlFor="email-input" className="label">
-								<span className="label-text font-medium">Email Address</span>
-							</label>
-							<div
-								className={`input input-bordered flex items-center gap-2 ${
+					<form onSubmit={handleSubmit} className="flex flex-col gap-4">
+						<label className="w-full">
+							<span className="label-text font-medium">Email Address</span>
+							<label
+								className={`input input-bordered flex items-center gap-2 mt-1 ${
 									fieldErrors.email ? "input-error" : ""
 								}`}
 							>
@@ -103,22 +101,21 @@ export default function LoginPage() {
 										fieldErrors.email ? "email-error" : undefined
 									}
 								/>
-							</div>
-							{fieldErrors.email && (
-								<div className="label">
-									<span className="label-text-alt text-error" id="email-error">
-										{fieldErrors.email}
-									</span>
-								</div>
-							)}
-						</div>
-
-						<div>
-							<label htmlFor="password-input" className="label">
-								<span className="label-text font-medium">Password</span>
 							</label>
-							<div
-								className={`input input-bordered flex items-center gap-2 ${
+							{fieldErrors.email && (
+								<span
+									className="label-text-alt text-error mt-1"
+									id="email-error"
+								>
+									{fieldErrors.email}
+								</span>
+							)}
+						</label>
+
+						<label className="w-full">
+							<span className="label-text font-medium">Password</span>
+							<label
+								className={`input input-bordered flex items-center gap-2 mt-1 ${
 									fieldErrors.password ? "input-error" : ""
 								}`}
 							>
@@ -137,22 +134,20 @@ export default function LoginPage() {
 										fieldErrors.password ? "password-error" : undefined
 									}
 								/>
-							</div>
+							</label>
 							{fieldErrors.password && (
-								<div className="label">
-									<span
-										className="label-text-alt text-error"
-										id="password-error"
-									>
-										{fieldErrors.password}
-									</span>
-								</div>
+								<span
+									className="label-text-alt text-error mt-1"
+									id="password-error"
+								>
+									{fieldErrors.password}
+								</span>
 							)}
-						</div>
+						</label>
 
 						<button
 							type="submit"
-							className="btn btn-primary w-full mt-2"
+							className="btn btn-primary w-full"
 							disabled={loading || !email || !password}
 							aria-label={loading ? "Logging in..." : "Login"}
 						>
@@ -166,14 +161,12 @@ export default function LoginPage() {
 							)}
 						</button>
 
-						<div className="text-center text-sm sm:text-base">
-							<p className="opacity-70">
-								Don&apos;t have an account?{" "}
-								<Link href="/register" className="link link-primary">
-									Sign up
-								</Link>
-							</p>
-						</div>
+						<p className="text-center text-sm sm:text-base opacity-70">
+							Don&apos;t have an account?{" "}
+							<Link href="/register" className="link link-primary">
+								Sign up
+							</Link>
+						</p>
 					</form>
 				</div>
 			</div>
