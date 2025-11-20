@@ -89,10 +89,6 @@ Send a POST request with:
 - If testing locally: Make sure you have `.env.local` with the API key
 - Restart the dev server after creating `.env.local`
 
-**Problem: 404 error**
-- Make sure the server is running (`npm run dev`)
-- Check the URL: `/api/gemini`
-
 ## Created By
 
 Okoh Perfection - 19, November 2025
