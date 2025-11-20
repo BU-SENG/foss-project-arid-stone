@@ -5,7 +5,7 @@
 - [x] Create project repository & initialize version control
 - [x] Set up backend environment (Next.js server functions)
 - [x] Initialize frontend (Next.js 16 + React 19)
-- [ ] Prepare .env.example environment template
+- [x] Prepare .env.example environment template
 - [ ] Set up production database (migrate from localStorage)
 
 ## Phase 2 — User Authentication
@@ -82,7 +82,7 @@
 - PDF transcript export with jsPDF including academic summary, semester performance, course details, and insights
 
 **Next Priorities:**
-1. Create .env.example template
-2. Implement secure authentication backend
+1. Implement secure authentication backend
+2. Set up production database (Supabase)
 3. Add frontend component tests
 4. Deploy to production
