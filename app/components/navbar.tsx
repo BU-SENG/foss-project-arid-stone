@@ -37,7 +37,7 @@ export function Navbar({ userName }: NavbarProps) {
 		{ href: "/courses", label: "Courses", icon: BookOpen },
 		{ href: "/analysis", label: "Analysis", icon: TrendingUp },
 		{ href: "/profile", label: "Profile", icon: User },
-	];
+	] as const;
 
 	return (
 		<nav className="navbar bg-base-100 shadow-lg sticky top-0 z-50">
@@ -87,7 +87,9 @@ export function Navbar({ userName }: NavbarProps) {
 					Logout
 				</button>
 
-				<div className="dropdown dropdown-end lg:hidden">
+				<div
+					className={`dropdown dropdown-end lg:hidden ${mobileMenuOpen ? "dropdown-open" : ""}`}
+				>
 					<button
 						type="button"
 						tabIndex={0}
@@ -98,43 +100,41 @@ export function Navbar({ userName }: NavbarProps) {
 					>
 						<Menu className="w-6 h-6" />
 					</button>
-					{mobileMenuOpen && (
-						<ul className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52">
-							{userName && (
-								<li className="menu-title">
-									<span>Welcome, {userName}</span>
-								</li>
-							)}
-							{navLinks.map((link) => {
-								const Icon = link.icon;
-								return (
-									<li key={link.href}>
-										<Link
-											href={link.href}
-											className={pathname === link.href ? "active" : ""}
-											onClick={closeMobileMenu}
-										>
-											<Icon className="w-4 h-4" />
-											{link.label}
-										</Link>
-									</li>
-								);
-							})}
-							<li className="border-t mt-2 pt-2">
-								<button
-									type="button"
-									onClick={() => {
-										handleLogout();
-										closeMobileMenu();
-									}}
-									className="text-error"
-								>
-									<LogOut className="w-4 h-4" />
-									Logout
-								</button>
+					<ul className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52">
+						{userName && (
+							<li className="menu-title">
+								<span>Welcome, {userName}</span>
 							</li>
-						</ul>
-					)}
+						)}
+						{navLinks.map((link) => {
+							const Icon = link.icon;
+							return (
+								<li key={link.href}>
+									<Link
+										href={link.href}
+										className={pathname === link.href ? "active" : ""}
+										onClick={closeMobileMenu}
+									>
+										<Icon className="w-4 h-4" />
+										{link.label}
+									</Link>
+								</li>
+							);
+						})}
+						<li className="border-t mt-2 pt-2">
+							<button
+								type="button"
+								onClick={() => {
+									handleLogout();
+									closeMobileMenu();
+								}}
+								className="text-error"
+							>
+								<LogOut className="w-4 h-4" />
+								Logout
+							</button>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</nav>
