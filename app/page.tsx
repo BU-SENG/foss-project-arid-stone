@@ -1,54 +1,182 @@
 "use client";
-import { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
+
+import { AlertCircle, GraduationCap, Lock, Mail } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import * as v from "valibot";
+import { LoginSchema } from "./lib/schemas/user";
+import { authenticateUser, setCurrentUser } from "./lib/storage/user";
 
 export default function LoginPage() {
-  const { login, user } = useAuth();
-  const [form, setForm] = useState({ email: "", password: "" });
-  const [err, setErr] = useState("");
+	const router = useRouter();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+	const [loading, setLoading] = useState(false);
+	const [fieldErrors, setFieldErrors] = useState<{
+		email?: string;
+		password?: string;
+	}>({});
 
-  async function submit(e: React.FormEvent) {
-    e.preventDefault();
-    const res = login(form);
-    if (!res.ok) setErr(res.message);
-  }
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		setError("");
+		setFieldErrors({});
+		setLoading(true);
 
-  return (
-    <div className="max-w-md mx-auto">
-      <div className="card bg-base-100 shadow">
-        <div className="card-body">
-          <h2 className="card-title">Academic Progress Tracker</h2>
-          <p className="opacity-70">Track your CGPA and academic journey</p>
+		try {
+			const data = v.parse(LoginSchema, { email, password });
+			const user = authenticateUser(data);
+			setCurrentUser(user);
+			router.push("/dashboard");
+		} catch (err) {
+			if (err instanceof v.ValiError) {
+				const newFieldErrors: { email?: string; password?: string } = {};
+				for (const issue of err.issues) {
+					const pathKey = issue.path?.[0]?.key;
+					const path = typeof pathKey === "string" ? pathKey : "";
+					if (path === "email" || path === "password") {
+						newFieldErrors[path as "email" | "password"] = issue.message;
+					}
+				}
+				if (Object.keys(newFieldErrors).length > 0) {
+					setFieldErrors(newFieldErrors);
+				} else {
+					setError(err.issues[0].message);
+				}
+			} else if (err instanceof Error) {
+				setError(err.message);
+			} else {
+				setError("Login failed. Please try again.");
+			}
+		} finally {
+			setLoading(false);
+		}
+	};
 
-          {err && <div className="alert alert-error mt-2">{err}</div>}
+	return (
+		<div className="min-h-screen flex items-center justify-center bg-base-200 p-4 sm:p-6 lg:p-8">
+			<div className="card w-full max-w-md bg-base-100 shadow-xl">
+				<div className="card-body p-6 sm:p-8">
+					<div className="text-center mb-6">
+						<div className="flex justify-center mb-3">
+							<GraduationCap className="w-16 h-16 text-primary" />
+						</div>
+						<h1 className="text-2xl sm:text-3xl font-bold">
+							Academic Progress Tracker
+						</h1>
+						<p className="text-sm sm:text-base opacity-70 mt-2">
+							Track your CGPA and academic journey
+						</p>
+					</div>
 
-          <form onSubmit={submit} className="space-y-3 mt-4">
-            <input
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="input input-bordered w-full"
-              placeholder="Email"
-            />
-            <input
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              className="input input-bordered w-full"
-              type="password"
-              placeholder="Password"
-            />
+					{error && (
+						<div role="alert" className="alert alert-error">
+							<AlertCircle className="h-6 w-6 shrink-0" />
+							<span>{error}</span>
+						</div>
+					)}
 
-            <button className="btn btn-primary w-full">Login</button>
+					<form onSubmit={handleSubmit} className="space-y-4">
+						<div>
+							<label htmlFor="email-input" className="label">
+								<span className="label-text font-medium">Email Address</span>
+							</label>
+							<div
+								className={`input input-bordered flex items-center gap-2 ${
+									fieldErrors.email ? "input-error" : ""
+								}`}
+							>
+								<Mail className="w-4 h-4 opacity-70" />
+								<input
+									id="email-input"
+									type="email"
+									className="grow"
+									placeholder="you@example.com"
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+									required
+									autoComplete="email"
+									aria-invalid={fieldErrors.email ? "true" : "false"}
+									aria-describedby={
+										fieldErrors.email ? "email-error" : undefined
+									}
+								/>
+							</div>
+							{fieldErrors.email && (
+								<div className="label">
+									<span className="label-text-alt text-error" id="email-error">
+										{fieldErrors.email}
+									</span>
+								</div>
+							)}
+						</div>
 
-            <p className="text-sm text-center">
-              Don't have an account?{" "}
-              <Link href="/register" className="link">
-                Sign up
-              </Link>
-            </p>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+						<div>
+							<label htmlFor="password-input" className="label">
+								<span className="label-text font-medium">Password</span>
+							</label>
+							<div
+								className={`input input-bordered flex items-center gap-2 ${
+									fieldErrors.password ? "input-error" : ""
+								}`}
+							>
+								<Lock className="w-4 h-4 opacity-70" />
+								<input
+									id="password-input"
+									type="password"
+									className="grow"
+									placeholder="Enter your password"
+									value={password}
+									onChange={(e) => setPassword(e.target.value)}
+									required
+									autoComplete="current-password"
+									aria-invalid={fieldErrors.password ? "true" : "false"}
+									aria-describedby={
+										fieldErrors.password ? "password-error" : undefined
+									}
+								/>
+							</div>
+							{fieldErrors.password && (
+								<div className="label">
+									<span
+										className="label-text-alt text-error"
+										id="password-error"
+									>
+										{fieldErrors.password}
+									</span>
+								</div>
+							)}
+						</div>
+
+						<button
+							type="submit"
+							className="btn btn-primary w-full mt-2"
+							disabled={loading || !email || !password}
+							aria-label={loading ? "Logging in..." : "Login"}
+						>
+							{loading ? (
+								<>
+									<span className="loading loading-spinner loading-sm" />
+									<span>Logging in...</span>
+								</>
+							) : (
+								"Login"
+							)}
+						</button>
+
+						<div className="text-center text-sm sm:text-base">
+							<p className="opacity-70">
+								Don&apos;t have an account?{" "}
+								<Link href="/register" className="link link-primary">
+									Sign up
+								</Link>
+							</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	);
 }
